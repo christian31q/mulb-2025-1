@@ -1,28 +1,34 @@
 window.addEventListener('load', function() {
-    let circles = document.querySelectorAll('.circle');
-    let colors = ['red', 'green', 'blue', 'yellow', 'purple'];
-    //let currentColorIndex = 0;
-    
-    const lightbox = document.createElement('div');
-    lightbox.classList.add('lightbox');
-    document.body.appendChild(lightbox);
-    
-    for (let i = 0; i < circles.length; i++) {
-        // Set index to 0 for each circle
-        let miniSquare = this.document.createElement('div');
-        miniSquare.classList.add('mini-square');
-        document.body.appendChild(miniSquare);
-        circles[i].currentColorIndex = 0;
+    let goku = document.querySelector('.goku-image');
+    goku.addEventListener('mouseout', changeGokuImage);
 
-        circles[i].addEventListener('click', function() {
-            this.currentColorIndex = (this.currentColorIndex + 1) % colors.length; // Increment the index and wrap around using modulo operator
-            changeCircleColor(this); // Change the color of the clicked circle
-            });
-        }
-
-    function changeCircleColor(circle) {
-        circle.style.backgroundColor = colors[circle.currentColorIndex];
+    function changeGokuImage() {
+        goku.style.opacity = 0; // Start fade-out
+        setTimeout(() => {
+            goku.src = goku.src.includes('img/goku01.jpg') ? 'img/goku02.jpg' : 'img/goku01.jpg'; // Toggle between two images
+            goku.style.opacity = 1; // Fade-in after image change
+        }, 1000); // Match the CSS transition duration
     }
+
+    // Display the obj properties
+    let obj = {
+        name: "Goku",
+        age: 25,
+        powerLevel: 9000,
+        transform: "Transforming into Super Saiyan!",
+        attack: function() {
+            console.log("Kamehameha!");
+        },
+    };
+
+    // Create a container to display the object
+    let objContainer = document.createElement('div');
+    objContainer.className = 'obj-container';
+    objContainer.innerHTML = `
+        <p>Name: ${obj.name}</p>
+        <p>Age: ${obj.age}</p>
+        <p>Power Level: ${obj.powerLevel}</p>
+        <p>Transform: ${obj.transform}</p>
+    `;
+    document.body.appendChild(objContainer);
 });
-
-
